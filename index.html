@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <title>ALARM CLOCK</title>
+</head>
+
+<body>
+
+    <div style="display: flex;justify-content: center">
+        <canvas id="canvas" width="500" height="500">cccc</canvas>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div>
+                <span class="close" id="closemodal">&times;</span>
+                <div style="color: wheat; text-align: center;font-weight: bold;font-size: 20px;">Set Alarm</div>
+
+            </div>
+
+            <div class="input-container">
+                <input type="time" class="time-input" id="alarmtime">
+                <input type="text" placeholder="Alarm Message" class="time-input" id="alarmmessage">
+            </div>
+            <div style="text-align: center;margin-top: 10px;">
+                <button id="savealram" class="btnstyle" onclick="handleAlarm()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div id="showAlarm" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closemodal2" style="font-size: 16px;">&times;</span>
+            <center>
+                <h2 id="display-message" style="color: wheat;text-align: center;margin-left: 5px;"></h2>
+                <div id="alarm-display" style="color: wheat;"></div><br> 
+                <input type="text" id="alarm-id" hidden>
+            </center>
+            <center>
+                <button class="btnstyle" onclick="stopAlarm()">Stop Alarm</button>
+            </center>
+        </div>
+       
+    </div>
+    <div class="setAlarmContainer">
+        <audio src="alarm.wav"></audio>
+        <button id="setalarm" class="btnstyle ">Set Alarm</button>
+    </div>
+    <ul id="alarm-list">
+
+    </ul>
+
+
+</body>
+
+<script src="index.js" type="text/javascript"></script>
+
+</html>
