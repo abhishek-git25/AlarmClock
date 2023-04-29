@@ -6,19 +6,26 @@ var ring = document.getElementById("ringtime");
 var alarmListContainer = document.getElementById('alarm-list');
 let alarmList = [];
 var element = document.querySelectorAll('alarms')
-// var turnOfAlarm = document.getElementById('turnofAlarm');
 var showAlarm = document.getElementById('showAlarm');
 var music = new Audio('alarm_clock_old.mp3');
 var alarmDisplay = document.getElementById('alarm-display');
 var messageDisplay = document.getElementById('display-message');
 var alarmid = document.getElementById('alarm-id');
+var modal = document.getElementById("myModal");
+// Get the button that opens the modal
+var setAlarm = document.getElementById("setalarm");
+// Get the <span> element that closes the modal
+var closebtn = document.getElementById("closemodal");
+var closeBtn2 = document.getElementById('closemodal2')
+
+var modal2 = document.getElementById('showAlarm');
 var alarmStatus = true;
 var currentTime = new Date();
 
 
 
 
-// console.log(getCurrentTime());
+
 
 
 ctx.strokeStyle = '#00ffff';
@@ -26,11 +33,15 @@ ctx.lineWidth = 5;
 ctx.shadowBlur = 10;
 ctx.shadowColor = '#00ffff'
 
+
+// function to calculate radian for circular borders of clock
 function degToRad(degree) {
     var factor = Math.PI / 180;
     return degree * factor;
 }
 
+
+// function to render the alarm clock
 function renderTime() {
     var now = new Date();
     var today = now.toDateString();
@@ -72,15 +83,19 @@ function renderTime() {
 }
 setInterval(renderTime, 40);
 
+
+// audio function
+
 function audioPlay() {
     music.play();
 }
 
 
 
+// function to filter out and stop the ringing alarm
+
 function stopAlarm() {
     alarmList.map((item) => {
-        console.log(item.id);
         if (item.id == alarmid.value) {
             deleteAlarm(alarmid.value)
             music.pause()
@@ -89,12 +104,14 @@ function stopAlarm() {
     })
 }
 
+// function to get currentTime
+
 function getCurrentTime() {
     let hours = currentTime.getHours();
     let mins = currentTime.getMinutes()
     let time;
     if (mins < 10) {
-        time = hours + ":"+ "0" + mins;
+        time = hours + ":" + "0" + mins;
     } else {
         time = hours + ":" + mins;
     }
@@ -103,11 +120,7 @@ function getCurrentTime() {
 
 
 
-
-
-
-// console.log(getCurrentTime());
-
+// function to append alarms to the list
 function addAlarms(alarms) {
     const li = document.createElement('li');
     li.innerHTML = `<div id="${alarms.id}" class="alarms">
@@ -118,8 +131,10 @@ function addAlarms(alarms) {
     alarmListContainer.append(li);
     li.style.textAlign = "center"
     li.style.marginRight = "24px";
-    // console.log(element);
 }
+
+
+// function to ring alarms whenever the condition meets
 
 function ringAlarm() {
     let d = new Date(); // for now
@@ -128,8 +143,6 @@ function ringAlarm() {
     alarmList.map(function (item) {
 
         if (d === item.time) {
-            console.log(item.id);
-
             audioPlay();
             showAlarm.style.display = 'block';
             alarmDisplay.innerHTML = item.time;
@@ -140,7 +153,7 @@ function ringAlarm() {
 }
 
 
-
+// delete alarm function
 function deleteAlarm(id) {
     const newAlarm = alarmList.filter(function (alarms) {
         return alarms.id != id;
@@ -151,6 +164,8 @@ function deleteAlarm(id) {
 
 
 
+// render alarms list on the dom
+
 function renderAlarms() {
     alarmListContainer.innerHTML = " ";
     for (let i = 0; i < alarmList.length; i++) {
@@ -160,15 +175,7 @@ function renderAlarms() {
 
 
 
-var modal = document.getElementById("myModal");
-// Get the button that opens the modal
-var setAlarm = document.getElementById("setalarm");
-// Get the <span> element that closes the modal
-var closebtn = document.getElementById("closemodal");
 
-var closeBtn2 = document.getElementById('closemodal2')
-
-var modal2 = document.getElementById('showAlarm');
 // When the user clicks the button, open the modal 
 setAlarm.onclick = function () {
     modal.style.display = "block";
@@ -189,13 +196,14 @@ window.onclick = function (event) {
 }
 
 
-
+// handle alram values and storing them in an array of objects
 function handleAlarm() {
     if (!setTime.value) {
         alert("Please enter alarm time first");
         return;
     }
     let id = Date.now();
+
     let alarmDetails = {
         time: setTime.value,
         message: getMessage.value,
@@ -203,29 +211,22 @@ function handleAlarm() {
     }
     alarmList.push(alarmDetails)
 
-
     modal.style.display = "none";
     renderAlarms();
 }
 
 
 
-
-// turnOfAlarm.addEventListener('click' ,function(){ 
-//     music.pause();
-//     alarmStatus = false;
-// })
-
-
-document.getElementById('alarmtime').addEventListener('change' , function(event){
-    console.log(event.target.value);
-    if(event.target.value < getCurrentTime()){
+// to get alarm time from input and check whether time is valid or not
+document.getElementById('alarmtime').addEventListener('change', function (event) {
+    if (event.target.value < getCurrentTime()) {
         alert("Invalid Time")
         event.target.value = "";
     }
 })
 
-console.log(getCurrentTime());
+
+// keeps firing the ring alarm function until there are alarms stored in the array
 
 setInterval(() => {
     if (alarmList.length > 0) {
@@ -233,21 +234,7 @@ setInterval(() => {
     }
 }, 1000)
 
-// clearInterval(() => {
-//     if (alarmList.length < 1) {
-//         ringAlarm();
-//     }
-// })
-    // if(alarmList.length < 1){
-    //     clearInterval(interval)
-    // }
 
-
-//  document.addEventListener('load' , interval)
-
-
-
-// ringAlarm()
 
 
 

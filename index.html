@@ -15,14 +15,20 @@
 
 <body>
 
-    <div style="display: flex;justify-content: center">
+
+    <!-- Canva to display clock -->
+
+    <div  class="canva-parent">
         <canvas id="canvas" width="500" height="500">cccc</canvas>
     </div>
+    <!-- Canva to display clock -->
+
+    <!-- setalarm modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <div>
                 <span class="close" id="closemodal">&times;</span>
-                <div style="color: wheat; text-align: center;font-weight: bold;font-size: 20px;">Set Alarm</div>
+                <div class="heading-text">Set Alarm</div>
 
             </div>
 
@@ -30,11 +36,15 @@
                 <input type="time" class="time-input" id="alarmtime">
                 <input type="text" placeholder="Alarm Message" class="time-input" id="alarmmessage">
             </div>
-            <div style="text-align: center;margin-top: 10px;">
+            <div class="text-center mt-10">
                 <button id="savealram" class="btnstyle" onclick="handleAlarm()">Save</button>
             </div>
         </div>
     </div>
+<!-- setalarm modal -->
+
+<!-- show alarm modal -->
+
     <div id="showAlarm" class="modal">
         <div class="modal-content">
             <span class="close" id="closemodal2" style="font-size: 16px;">&times;</span>
@@ -49,13 +59,22 @@
         </div>
        
     </div>
+
+    <!-- show alarm modal -->
+
+    <!-- set  alarm button -->
     <div class="setAlarmContainer">
         <audio src="alarm.wav"></audio>
         <button id="setalarm" class="btnstyle ">Set Alarm</button>
     </div>
+    <!-- set  alarm button -->
+
+
+    <!-- alarm list -->
     <ul id="alarm-list">
 
     </ul>
+    <!-- alarm list -->
 
 
 </body>
